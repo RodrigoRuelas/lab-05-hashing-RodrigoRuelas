@@ -75,7 +75,18 @@ int Aleatorio_Fn(int x, int n) {
 
 int main()
 {
-    printf("Hello World");
+    struct HashTable* ht1 = initHashTable(Modulo_1, 10);
+    insertar(ht1, 5);
+    insertar(ht1, 15);
+    int elemento = encontrar(ht1, 15);
+    printf("Elemento encontrado: %d\n", elemento);
+    int elemento_eliminado = eliminar(ht1, 15);
+    printf("Elemento eliminado: %d\n", elemento_eliminado);
+
+    struct HashTable* ht2 = initHashTable(Aleatorio_Fn, 10);
+    insertar(ht2, 1234567);
+    int encontrado1 = encontrar(ht2, 1234567);
+    printf("Elemento encontrado: %d\n", encontrado1);
 
     return 0;
 }
