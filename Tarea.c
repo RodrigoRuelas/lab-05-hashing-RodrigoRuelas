@@ -73,6 +73,19 @@ int Aleatorio_Fn(int x, int n) {
     return rand() % n;
 }
 
+int (*RandomHashFun(int M))(int) {
+    int fnTable[M];
+    for (int x = 0; x < M; x++) {
+        fnTable[x] = Aleatorio_Fn(x, 10);
+    }
+    
+    int randomHash(int x) {
+        return fnTable[x];
+    }
+    
+    return randomHash;
+}
+
 int main()
 {
     struct HashTable* ht1 = initHashTable(Modulo_1, 10);
