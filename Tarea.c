@@ -18,6 +18,53 @@ struct HashTable* initHashTable(int (*hashFn)(int, int), int n) {
     return ht;
 }
 
+void insertar(struct HashTable* ht, int x) {
+    int index = ht->h(x, ht->n);
+    if (ht->bucket[index] == NULL) {
+        ht->bucket[index] = (int*)malloc(sizeof(int));
+        ht->bucket[index][0] = x;
+    } else {
+        int count = 0;
+        while (ht->bucket[index][count] != 0) {
+            count++;
+            ht->bucket[index] = (int*)realloc(ht->bucket[index], (count + 1) * sizeof(int));
+        }
+        ht->bucket[index][count] = x;
+    }
+}
+
+int eliminar(struct HashTable* ht, int x) {
+    int index = ht->h(x, ht->n);
+    if (ht->bucket[index] != NULL) {
+        int count = 0;
+        while (ht->bucket[index][count] != 0) {
+            if (ht->bucket[index][count] == x) {
+                int deleted = ht->bucket[index][count];
+                for (int i = count; ht->bucket[index][i] != 0; i++) {
+                    ht->bucket[index][i] = ht->bucket[index][i + 1];
+                }
+                return deleted;
+            }
+            count++;
+        }
+    }
+    return -1;
+}
+
+int encontrar(struct HashTable* ht, int x) {
+    int index = ht->h(x, ht->n);
+    if (ht->bucket[index] != NULL) {
+        int count = 0;
+        while (ht->bucket[index][count] != 0) {
+            if (ht->bucket[index][count] == x) {
+                return ht->bucket[index][count];
+            }
+            count++;
+        }
+    }
+    return -1;
+}
+
 int main()
 {
     printf("Hello World");
