@@ -65,6 +65,14 @@ int encontrar(struct HashTable* ht, int x) {
     return -1;
 }
 
+int Modulo_1(int x, int n) {
+    return x % n;
+}
+
+int Aleatorio_Fn(int x, int n) {
+    return rand() % n;
+}
+
 int main()
 {
     printf("Hello World");
