@@ -101,5 +101,11 @@ int main()
     int encontrado1 = encontrar(ht2, 1234567);
     printf("Elemento encontrado: %d\n", encontrado1);
 
+    int M = 100000;
+    int (*randomFn2)(int) = RandomHashFun(M);
+    int resultado1 = randomFn2(52);
+    int resultado2 = randomFn2(324);
+    printf("Resultado 1: %d\n", resultado1);
+    printf("Resultado 2: %d\n", resultado2);
     return 0;
 }
