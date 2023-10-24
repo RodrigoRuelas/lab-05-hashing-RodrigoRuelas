@@ -89,18 +89,34 @@ int (*RandomHashFun(int M, int n))(int, int) {
 }
 int main()
 {
+    int M1 = Modulo_1(5, 10);
+    int M2 = Modulo_1(15, 10);
+    int M3 = Modulo_1(123456, 10);
+    printf("Modulo_1 de M1 = %d\n", M1);
+    printf("Modulo_1 de M2 = %d\n", M2);
+    printf("Modulo_1 de M3 = %d\n", M3);
     struct HashTable* ht1 = initHashTable(Modulo_1, 10);
     insertar(ht1, 5);
     insertar(ht1, 15);
     int elemento = encontrar(ht1, 15);
-    printf("Elemento encontrado: %d\n", elemento);
+    printf("Elemento encontrado en ht1: %d\n", elemento);
     int elemento_eliminado = eliminar(ht1, 15);
-    printf("Elemento eliminado: %d\n", elemento_eliminado);
+    printf("Elemento eliminado en ht1: %d\n", elemento_eliminado);
+    int elemento2 = encontrar(ht1, 15);
+    printf("Elemento encontrado en ht1: %d\n", elemento2);
 
+    printf("\n");
+
+    int R1 = Aleatorio_Fn(52, 10);
+    int R2 = Aleatorio_Fn(1234567, 10);
+    printf("Aleatorio_Fn de R1 = %d\n", R1);
+    printf("Aleatorio_Fn de R2 = %d\n", R2);
     struct HashTable* ht2 = initHashTable(Aleatorio_Fn, 10);
     insertar(ht2, 1234567);
     int encontrado1 = encontrar(ht2, 1234567);
-    printf("Elemento encontrado: %d\n", encontrado1);
+    printf("Elemento encontrado en ht2: %d\n", encontrado1);
+    
+    printf("\n");
 
     int M = 100000;
     int (*randomFn2)(int) = RandomHashFun(M);
