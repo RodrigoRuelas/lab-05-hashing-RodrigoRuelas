@@ -21,15 +21,17 @@ struct HashTable* initHashTable(int (*hashFn)(int, int), int n) {
 void insertar(struct HashTable* ht, int x) {
     int index = ht->h(x, ht->n);
     if (ht->bucket[index] == NULL) {
-        ht->bucket[index] = (int*)malloc(sizeof(int));
+        ht->bucket[index] = (int*)malloc(2 * sizeof(int));
         ht->bucket[index][0] = x;
+        ht->bucket[index][1] = 0;
     } else {
         int count = 0;
-        while (ht->bucket[index][count] != 0) {
+        while (ht->bucket[index][count + 1] != 0) {
             count++;
-            ht->bucket[index] = (int*)realloc(ht->bucket[index], (count + 1) * sizeof(int));
         }
+        ht->bucket[index] = (int*)realloc(ht->bucket[index], (count + 2) * sizeof(int));
         ht->bucket[index][count] = x;
+        ht->bucket[index][count + 1] = 0;
     }
 }
 
@@ -73,19 +75,18 @@ int Aleatorio_Fn(int x, int n) {
     return rand() % n;
 }
 
-int (*RandomHashFun(int M))(int) {
-    int fnTable[M];
+int (*RandomHashFun(int M, int n))(int, int) {
+    int *fnTable = (int*)malloc(M * sizeof(int));
     for (int x = 0; x < M; x++) {
-        fnTable[x] = Aleatorio_Fn(x, 10);
+        fnTable[x] = Aleatorio_Fn(x, n);
     }
     
-    int randomHash(int x) {
+    int randomHash(int x, int n) {
         return fnTable[x];
     }
     
     return randomHash;
 }
-
 int main()
 {
     struct HashTable* ht1 = initHashTable(Modulo_1, 10);
