@@ -119,10 +119,20 @@ int main()
     printf("\n");
 
     int M = 100000;
-    int (*randomFn2)(int) = RandomHashFun(M);
-    int resultado1 = randomFn2(52);
-    int resultado2 = randomFn2(324);
-    printf("Resultado 1: %d\n", resultado1);
-    printf("Resultado 2: %d\n", resultado2);
+    int (*Aleatorio_Fn2)(int, int) = RandomHashFun(M, 10);
+    int S1 = Aleatorio_Fn2(52, 10);
+    int S2 = Aleatorio_Fn2(1234567, 10);
+    printf("Aleatorio_Fn2 de S1 = %d\n", S1);
+    printf("Aleatorio_Fn2 de S2 = %d\n", S2);
+    struct HashTable* ht3 = initHashTable(Aleatorio_Fn2, 10);
+    insertar(ht3, 123);
+    insertar(ht3, 26);
+    int elemento3 = encontrar(ht3, 123);
+    printf("Elemento encontrado en ht3: %d\n", elemento3);
+
+    free(ht1);
+    free(ht2);
+    free(ht3);
+    
     return 0;
 }
